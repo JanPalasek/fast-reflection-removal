@@ -5,9 +5,9 @@ Removes reflections quickly and easily.
 
 ## How to use
 You can either:
-- Download and install it as a Python package.
-- Clone and install it as a repository.
-- Use it as a web app on [my website](https://janpalasek.com/fast-reflection-removal.html).
+- install it as a Python package,
+- clone and use it as a repository, or
+- use it as a web app on [my website](http://janpalasek.com/fast-reflection-removal.html).
 
 ## How to install
 **Prerequisities**
