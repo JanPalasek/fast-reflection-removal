@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='fast-reflection-removal',
-    version='0.1a',
+    version='1.0a',
     description="",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -14,12 +14,11 @@ setuptools.setup(
         "": "src/python"
     },
     install_requires=[
-        "argparse~=1.4.0",
-        "numpy~=1.21.2",
-        "scipy~=1.7.1",
-        "matplotlib~=3.4",
+        "numpy",
+        "scipy",
+        "matplotlib",
     ],
     packages=setuptools.find_packages("src/python"),
     scripts=["bin/run.py"],
-    python_requires="~=3.8"
+    python_requires=">=3.8"
 )

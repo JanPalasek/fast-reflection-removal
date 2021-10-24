@@ -1,7 +1,7 @@
 # Fast Reflection Removal
 Removes reflections quickly and easily.
 
-![demo](docs/demo.png)
+![demo](https://github.com/JanPalasek/fast-reflection-removal/blob/main/docs/demo.png?raw=true)
 
 ## How to install
 **Prerequisities**
@@ -11,7 +11,7 @@ Removes reflections quickly and easily.
 In your own project, just perform the following command:
 ```bash
 # python refers to the virtual environment to install package to
-python -m pip install git+https://github.com/JanPalasek/fast-reflection-removal
+python -m pip install fast-reflection-removal
 ```
 
 Now, you can use the reflection removal in your project in the following manner:
