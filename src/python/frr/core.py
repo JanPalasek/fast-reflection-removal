@@ -1,7 +1,6 @@
 from frr.base import dct2, idct2, laplacian
 from frr.utils import FileWriter
 import numpy as np
-import scipy
 import matplotlib.pyplot as plt
 
 
@@ -25,22 +24,16 @@ class FastReflectionRemoval():
 
         self.debug_writer = debug_writer
 
-    def remove_reflection(self, image: np.ndarray) -> np.ndarray:
+    def _compute_rhs(self, image: np.ndarray) -> np.ndarray:
         """
-        Removes reflection from specified image.
+        Computes right-hand side of equation 7 from the paper.
 
         Args:
-            image (np.ndarray): Image represented as numpy array of shape (H, W, C), where H is height, W is width and C is channels.
-            The image is expected to have values in the interval [0, 1].
+            image (np.ndarray): Input image. Must be normalised to [0, 1] values.
 
         Returns:
-            np.ndarray: Returns image with removed reflections with values between 0 and 1.
+            np.ndarray: Right-hand side of the equation.
         """
-        if not np.all((0 <= image) & (image <= 1)):
-            raise ValueError("Input image doesn't have all values between 0 and 1.")
-        if len(image.shape) != 3:
-            raise ValueError("Input image must have 3 dimensions.")
-        
         channels = image.shape[-1]
 
         # iteratively compute for each channel individually
@@ -70,7 +63,21 @@ class FastReflectionRemoval():
             rhs_out = np.interp(rhs, (rhs.min(), rhs.max()), (0, 1))
             self.debug_writer.save_image(rhs_out, name="", category="rhs")
 
-        T = np.zeros(shape=image.shape)
+        return rhs
+
+    def _compute_T(self, rhs: np.ndarray) -> np.ndarray:
+        """
+        Computes T matrix (the original matrix with reflection suppressed).
+
+        Args:
+            rhs (np.ndarray): Right-hand side of the equation 7.
+
+        Returns:
+            Returns T matrix.
+        """
+        channels = rhs.shape[-1]
+
+        T = np.zeros(shape=rhs.shape)
 
         # perform Poisson DCT to solve partial differential eq
         for c in range(channels):
@@ -101,6 +108,28 @@ class FastReflectionRemoval():
             if self.debug_writer:
                 self.debug_writer.save_image(const, name=f"{c}", category=f"T")
 
+        return T
+
+    def remove_reflection(self, image: np.ndarray) -> np.ndarray:
+        """
+        Removes reflection from specified image.
+
+        Args:
+            image (np.ndarray): Image represented as numpy array of shape (H, W, C), where H is height, W is width and C is channels.
+            The image is expected to have values in the interval [0, 1].
+
+        Returns:
+            np.ndarray: Returns image with removed reflections with values between 0 and 1.
+        """
+        if not np.all((0 <= image) & (image <= 1)):
+            raise ValueError("Input image doesn't have all values between 0 and 1.")
+        if len(image.shape) != 3:
+            raise ValueError("Input image must have 3 dimensions.")
+
+        rhs = self._compute_rhs(image)
+        T = self._compute_T(rhs)
+        del rhs
+        
         # scale back to the interval [0, 1]
         T = np.interp(T, (T.min(), T.max()), (0, +1))
 

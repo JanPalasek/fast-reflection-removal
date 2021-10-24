@@ -2,7 +2,7 @@ import numpy as np
 from typing import Tuple
 from scipy.fftpack import dct, idct
 
-def gradient(A: np.ndarray, append_zeros=False) -> Tuple[np.ndarray]:
+def gradient(A: np.ndarray) -> Tuple[np.ndarray]:
     """
     Computes gradients of input numpy array. Returns tuple, where the first
     part is gradient in direction of axis 0 (rows), then axis 1 (columns),...
@@ -45,7 +45,6 @@ def divergence(A):
 
 
 def laplacian(f, h: float = None):
-    rows, cols = f.shape
     dims = 2
 
     grads = gradient(f)
