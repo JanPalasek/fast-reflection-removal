@@ -1,6 +1,7 @@
 import os
 import datetime
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 class FileWriter:
@@ -40,3 +41,17 @@ class FileWriter:
 
         plot.savefig(dest, dpi=dpi, bbox_inches="tight")
         plot.clf()
+
+
+def min_max_scale(ar: np.array, new_min: float = 0, new_max: float = 1):
+    """
+    Scales input array to have values in [0, 1] in-place.
+
+    Args:
+        ar (np.array): Input array.
+        new_min (float): New minimum.
+        new_max (float): New maximum.
+    """
+    ar -= ar.min()
+    ar /= ar.ptp()
+    ar *= (new_max - new_min) + new_min

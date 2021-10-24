@@ -1,5 +1,5 @@
 from frr.base import dct2, idct2, laplacian
-from frr.utils import FileWriter
+from frr.utils import FileWriter, min_max_scale
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -126,12 +126,13 @@ class FastReflectionRemoval():
         if len(image.shape) != 3:
             raise ValueError("Input image must have 3 dimensions.")
 
-        rhs = self._compute_rhs(image)
-        T = self._compute_T(rhs)
-        del rhs
-        
-        # scale back to the interval [0, 1]
-        T = np.interp(T, (T.min(), T.max()), (0, +1))
+        # extract compute function to create scopes to save memory
+        compute_fn = lambda img: self._compute_T(self._compute_rhs(img))
+
+        # compute T matrix and scale
+        T = compute_fn(image)
+        T = self._compute_T(self._compute_rhs(image))
+        min_max_scale(T)
 
         if self.debug_writer:
             self.debug_writer.save_image(T, name="", category="out")

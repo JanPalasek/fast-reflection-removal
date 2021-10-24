@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='fast-reflection-removal',
-    version='1.0b',
+    version='1.0b1',
     description="",
     long_description=long_description,
     long_description_content_type="text/markdown",
