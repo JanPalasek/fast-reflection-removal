@@ -3,6 +3,12 @@ Removes reflections quickly and easily.
 
 ![demo](https://github.com/JanPalasek/fast-reflection-removal/blob/main/docs/demo.png?raw=true)
 
+## How to use
+You can either:
+- Download and install it as a Python package.
+- Clone and install it as a repository.
+- Use it as a web app on [my website](https://janpalasek.com/fast-reflection-removal.html).
+
 ## How to install
 **Prerequisities**
 - Python: 3.8
