@@ -6,16 +6,24 @@ import matplotlib.pyplot as plt
 
 class FastReflectionRemoval():
     """
-    An instance of this class is able to remove reflections from specified image.
+    An instance of this class is able to remove reflections from specified image. It implements
+    the algorithm to remove reflections from [Fast Single Image Reflection Suppression via Convex Optimization](https://arxiv.org/pdf/1903.03889.pdf) paper.
     """
 
     def __init__(self, h: float, lmbd: float = 0, mu: float = 1, epsilon: float = 1e-8, debug_writer: FileWriter = None):
+        """
+        Args:
+            h (float): h parameter from the paper. Larger h means more reflections removed, but potentially worse quality of the image.
+            lmbd (float, optional): . Defaults to 0.
+            mu (float, optional): Defaults to 1.
+            debug_writer (FileWriter, optional): Helper component to enable writing of debug outputs. Defaults to None.
+        """
         if not (0 <= h <= 1):
-            raise ValueError(f"Value of 'h' must be between 0 and 1 (included). Recommended values are between 0 and 0.13.")
+            raise ValueError("Value of 'h' must be between 0 and 1 (included). Recommended values are between 0 and 0.13.")
         if not (0 <= lmbd <= 1):
-            raise ValueError(f"Value of 'lmbd' must be between 0 and 1 (included). Recommended value is 0.")
+            raise ValueError("Value of 'lmbd' must be between 0 and 1 (included). Recommended value is 0.")
         if not (0 <= mu <= 1):
-            raise ValueError(f"Value of 'mu' must be between 0 and 1 (included). Recommended value is 1.")
+            raise ValueError("Value of 'mu' must be between 0 and 1 (included). Recommended value is 1.")
 
         self.h = h
         self.lmbd = lmbd

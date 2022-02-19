@@ -19,6 +19,8 @@ setuptools.setup(
         "matplotlib",
     ],
     packages=setuptools.find_packages("src/python"),
-    scripts=["bin/run.py"],
-    python_requires=">=3.8"
+    entry_points={
+        "console_scripts": ["frr = frr.__main__:main"]
+    },
+    python_requires=">=3.6"
 )
