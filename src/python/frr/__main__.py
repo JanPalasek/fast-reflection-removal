@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 @click.command()
 @click.argument("input-path", type=click.Path())
-@click.option("--output-path", default="out.png", type=click.Path(), help="An optional output path.")
+@click.argument("output-path", type=click.Path())
 @click.option("-h", default=0.03, type=click.FloatRange(0, 1), help="Measures how strong reflection removal is going to be. Higher h means stronger dereflection.")
 @click.option("--debug", is_flag=True, help="If True, then the debug outputs are printed into out/.")
 def main(input_path, output_path, h, debug):
