@@ -1,4 +1,6 @@
 # Fast Reflection Removal
+![example workflow](https://github.com/JanPalasek/fast-reflection-removal/actions/workflows/ci.yaml/badge.svg)
+
 Removes reflections quickly and easily.
 
 ![demo](https://github.com/JanPalasek/fast-reflection-removal/blob/main/docs/demo.png?raw=true)
