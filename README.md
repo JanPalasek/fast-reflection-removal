@@ -56,10 +56,10 @@ Example:
 ```bash
 # activate the environment
 source venv/bin/activate # on Windows ./venv/Scripts/activate.ps1 in Powershell
-frr ".\tests\test_frr\fixtures\toy_example.jpg" "out.jpg" -h 0.11
+frr "tests/test_frr/fixtures/toy_example.jpg" "out.jpg" -h 0.11
 ```
 
-The program, in this example, loads input image from the path `.\tests\test_frr\fixtures\toy_example.jpg`, processes it with parameter `h=0.11` and outputs it into `out.jpg`. More information about the parameters can be obtained by invoking `frr --help`.
+The program, in this example, loads input image from the path `tests/test_frr/fixtures/toy_example.jpg`, processes it with parameter `h=0.11` and outputs it into `out.jpg`. More information about the parameters can be obtained by invoking `frr --help`.
 
 
 ## Project structure
