@@ -9,7 +9,7 @@ Removes reflections quickly and easily.
 You can either:
 - install it as a Python package,
 - clone and use it as a repository, or
-- use it as a web app on [my website](http://janpalasek.com/fast-reflection-removal.html).
+- use it as a web app on [my website](https://janpalasek.com/projects/fast_reflection_removal/).
 
 ## How to install
 ### As a package
